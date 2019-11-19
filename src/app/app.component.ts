@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-  title = 'angular-qr-app';
+  letsboot =
+    "https://calendar.google.com/calendar/gp#~calendar:view=e&bm=1?action=TEMPLATE&text=test&dates=20191227T224000Z&details=APPOINTMENT&location=BangasarBaru&sf=true&output=xml";
 }
