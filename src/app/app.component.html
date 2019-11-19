@@ -1,1 +1,164 @@
-<ngx-qrcode qrc-element-type="url" [qrc-value]="letsboot"></ngx-qrcode>
+<div class="container-fluid">
+  <nav
+    class="shadow-sm rounded navbar fixed-top navbar-expand-sm bg-light justify-content-center"
+  >
+    <div
+      class="collapse navbar-collapse justify-content-center"
+      id="navbarNavAltMarkup"
+    >
+      <div class="navbar-nav mr-7">
+        <h2 class="nav-item nav-link">Event Adder</h2>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div class="container-fluid">
+  <div *ngIf="!displayCode" class="row mt-6 mb-0">
+    <div class="col d-flex justify-content-center">
+      <div class="card bg-light mb-3 card-width">
+        <div class="card-header font-weight-bold text-success">
+          Generate QR to add Event to google Calender
+        </div>
+        <div class="card-body">
+          <form [formGroup]="eventForm" (ngSubmit)="generateQrCode()">
+            <div class="form-group">
+              <label>Title</label>
+              <input type="text" formControlName="title" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>From<sup> * </sup></label>
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  placeholder="yyyy-mm-dd"
+                  formControlName="fromDate"
+                  ngbDatepicker
+                  #dpFromDate="ngbDatepicker"
+                  [ngClass]="{ 'is-invalid': submitted && f.fromDate.errors }"
+                  [(ngModel)]="fromDate"
+                />
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-secondary calendar"
+                    (click)="dpFromDate.toggle()"
+                    type="button"
+                  ></button>
+                </div>
+                <div
+                  *ngIf="submitted && f.fromDate.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f.fromDate.errors.required">
+                    From Date is required
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>To<sup> * </sup></label>
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  placeholder="yyyy-mm-dd"
+                  formControlName="toDate"
+                  ngbDatepicker
+                  #dpToDate="ngbDatepicker"
+                  [ngClass]="{ 'is-invalid': submitted && f.toDate.errors }"
+                  [(ngModel)]="toDate"
+                />
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-secondary calendar"
+                    (click)="dpToDate.toggle()"
+                    type="button"
+                  ></button>
+                </div>
+                <div
+                  *ngIf="submitted && f.toDate.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f.toDate.errors.required">
+                    To Date is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>From Time<sup> * </sup></label>
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  type="time"
+                  formControlName="fromTime"
+                  [(ngModel)]="fromTime"
+                  [ngClass]="{ 'is-invalid': submitted && f.fromTime.errors }"
+                />
+
+                <div
+                  *ngIf="submitted && f.fromTime.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f.fromTime.errors.required">
+                    From Time is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>To Time<sup> * </sup></label>
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  type="time"
+                  formControlName="toTime"
+                  [(ngModel)]="toTime"
+                  [ngClass]="{ 'is-invalid': submitted && f.toTime.errors }"
+                />
+
+                <div
+                  *ngIf="submitted && f.toTime.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f.toTime.errors.required">
+                    To Time is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Location</label>
+              <input
+                type="text"
+                formControlName="location"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <input
+                type="text"
+                formControlName="description"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary">Search</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6 ml-5 text-center" *ngIf="displayCode">
+    <ngx-qrcode qrc-element-type="url" [qrc-value]="addEventUrl"></ngx-qrcode>
+
+    <div class="mt-6">
+      <button class="btn btn-primary btn-block" (click)="displayForm()">
+        Back
+      </button>
+    </div>
+  </div>
+</div>
