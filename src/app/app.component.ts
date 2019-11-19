@@ -39,18 +39,27 @@ export class AppComponent implements OnInit {
       console.log(this.eventForm.value);
 
       const fromYear = this.eventForm.value.fromDate.year;
-      const fromMonth = this.eventForm.value.fromDate.month;
-      const fromDay = this.eventForm.value.fromDate.day;
+      const fromMonth = this.appendZeroToMonthAndDay(
+        this.eventForm.value.fromDate.month
+      );
+      console.log(fromMonth);
+      const fromDay = this.appendZeroToMonthAndDay(
+        this.eventForm.value.fromDate.day
+      );
       const toYear = this.eventForm.value.toDate.year;
-      const toMonth = this.eventForm.value.toDate.month;
-      const toDay = this.eventForm.value.toDate.day;
+      const toMonth = this.appendZeroToMonthAndDay(
+        this.eventForm.value.toDate.month
+      );
+      const toDay = this.appendZeroToMonthAndDay(
+        this.eventForm.value.toDate.day
+      );
       const fromTime = this.eventForm.value.fromTime.replace(":", "");
       const toTime = this.eventForm.value.toTime.replace(":", "");
       const location = this.eventForm.value.location;
       const title = this.eventForm.value.title;
       const description = this.eventForm.value.description;
 
-      const dates = `${fromYear}${fromMonth}${fromDay}T${fromTime}Z/${toYear}${toMonth}${toDay}T${toTime}Z`;
+      const dates = `${fromYear}${fromMonth}${fromDay}T${fromTime}00Z/${toYear}${toMonth}${toDay}T${toTime}00Z`;
       this.displayQrCode(dates, title, location, description);
     }
   }
@@ -64,5 +73,13 @@ export class AppComponent implements OnInit {
 
   displayForm() {
     this.displayCode = false;
+  }
+
+  appendZeroToMonthAndDay(value) {
+    if (value < 10) {
+      return "0" + value;
+    } else {
+      return value;
+    }
   }
 }
