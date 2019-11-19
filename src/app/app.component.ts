@@ -36,13 +36,11 @@ export class AppComponent implements OnInit {
     if (this.eventForm.invalid) {
       return;
     } else {
-      console.log(this.eventForm.value);
-
       const fromYear = this.eventForm.value.fromDate.year;
       const fromMonth = this.appendZeroToMonthAndDay(
         this.eventForm.value.fromDate.month
       );
-      console.log(fromMonth);
+
       const fromDay = this.appendZeroToMonthAndDay(
         this.eventForm.value.fromDate.day
       );
@@ -68,7 +66,6 @@ export class AppComponent implements OnInit {
     this.displayCode = true;
 
     this.addEventUrl = `${this.baseUrl}&text=${title}&dates=${dates}&details=${description}&location=${location}&sf=true&output=xml`;
-    console.log(this.addEventUrl);
   }
 
   displayForm() {
