@@ -8,8 +8,9 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements OnInit {
-  baseUrl =
-    "https://calendar.google.com/calendar/gp#~calendar:view=e&bm=1?action=TEMPLATE";
+  // baseUrl =
+  //   "https://calendar.google.com/calendar/gp#~calendar:view=e&bm=1?action=TEMPLATE";
+  baseUrl = "https://qrcode.tec-it.com/API/QRCode?data=BEGIN:VEVENT%0a";
   addEventUrl;
   displayCode = false;
   submitted = false;
@@ -57,15 +58,18 @@ export class AppComponent implements OnInit {
       const title = this.eventForm.value.title;
       const description = this.eventForm.value.description;
 
-      const dates = `${fromYear}${fromMonth}${fromDay}T${fromTime}00Z/${toYear}${toMonth}${toDay}T${toTime}00Z`;
-      this.displayQrCode(dates, title, location, description);
+      const dateStart = `${fromYear}${fromMonth}${fromDay}T${fromTime}00Z`;
+      const dateEnd = `${toYear}${toMonth}${toDay}T${toTime}00Z`;
+      this.displayQrCode(dateStart, dateEnd, title, location, description);
     }
   }
 
-  displayQrCode(dates, title, location, description) {
+  displayQrCode(dateStart, dateEnd, title, location, description) {
     this.displayCode = true;
 
-    this.addEventUrl = `${this.baseUrl}&text=${title}&dates=${dates}&details=${description}&location=${location}&sf=true&output=xml`;
+    //this.addEventUrl = `${this.baseUrl}&text=${title}&dates=${dates}&details=${description}&location=${location}&sf=true&output=xml`;
+    this.addEventUrl = `${this.baseUrl}SUMMARY:${title}%0aDESCRIPTION:${description}%0aLOCATION:${location}%0aDTSTART:${dateStart}%0aDTEND:${dateEnd}%0aEND:VEVENT&backcolor=%23ffffff&size=Small`;
+    console.log(this.addEventUrl);
   }
 
   displayForm() {
