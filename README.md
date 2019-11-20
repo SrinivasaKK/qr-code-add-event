@@ -1,11 +1,11 @@
-# Generate QR Code for saving event in google calender
+# Generate QR Code for saving event in calender of your phone
 
 Takes From and to date and time and creates a QR code.
 
-QR code can be scanned via phones which would direct to google calender to create events with the values
+QR code can be scanned via phones which would add an event in your phone calender app with the values
 provided by the user
 
-Note: The google calender api accepts date in format YYYYMMDDThhmm00Z
+Note: The api accepts date in format YYYYMMDDThhmm00Z
 where Y- year, mm-month DD-day, hh-hours, mm-minutes
 
 ## Steps to install
